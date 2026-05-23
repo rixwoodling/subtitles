@@ -16,6 +16,7 @@ Built for:
 - subtitle restoration workflows
 
 ---
+
 # Features
 
 ## OCR Transcription
@@ -34,6 +35,7 @@ Outputs:
 - `.srt`
 
 ---
+
 ## ASR Transcription
 Generate subtitles directly from speech audio using MLX Whisper.
 
@@ -52,6 +54,7 @@ Outputs:
 - `.vtt`
 
 ---
+
 ## Intelligent OCR + ASR Fusion
 Merge OCR subtitles with ASR transcripts using:
 - timestamps
@@ -72,6 +75,7 @@ Outputs:
 - `.vtt`
 
 ---
+
 # Included Scripts
 
 | Script | Purpose |
@@ -81,49 +85,121 @@ Outputs:
 | `ASR+OCR_merger.py` | Merge OCR + ASR intelligently |
 
 ---
-# Installation
 
-## System Dependencies (macOS)
+# Requirements
 
-Install required tools:
+## Supported Platforms
+
+### OCR Scripts
+`OCR_transcriber.py` works on:
+- macOS
+- Linux
+- Windows
+
+### ASR Scripts
+`ASR_transcriber.py` currently uses:
+- `mlx-whisper`
+
+which requires:
+- Apple Silicon
+- macOS
+- MLX support
+
+Recommended:
+- M1 / M2 / M3 / M4 Macs
+
+Best performance:
+- M3 / M4 systems
+
+---
+
+# Required System Tools
+
+Install these first.
+
+## macOS
 
 ```bash
 brew install ffmpeg yt-dlp
 ```
 
+## Ubuntu / Debian
+
+```bash
+sudo apt install ffmpeg yt-dlp
+```
+
 ---
-## Create Virtual Environment
+
+# Python Requirements
+
+Install inside a virtual environment:
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
+Then install Python dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Current `requirements.txt`:
+
+```txt
+easyocr
+mlx-whisper
+opencv-python
+rapidfuzz
+torch
+torchvision
+```
+
 ---
-## OCR Dependencies
 
-```bash
-pip install easyocr rapidfuzz opencv-python
-```
+# Important Notes
 
-Optional but recommended:
+## MLX Whisper Limitation
 
-```bash
-pip install torch torchvision
-```
+`mlx-whisper` is Apple Silicon specific.
+
+If using:
+- Intel Mac
+- Linux
+- Windows
+- NVIDIA GPU systems
+
+you may want to replace:
+- `mlx-whisper`
+
+with:
+- `faster-whisper`
+- `openai-whisper`
+
+Future versions of `submerge` may support multiple ASR backends.
 
 ---
-## ASR Dependencies
 
-```bash
-pip install mlx-whisper
-```
+# First Run Downloads
+
+The first run will automatically download:
+- EasyOCR AI models
+- Whisper AI models
+
+This is normal.
+
+Model downloads can be several GB depending on:
+- OCR language packs
+- Whisper model size
 
 ---
 
 # Usage
 
 ---
+
 # OCR Transcriber
 
 Extract hardcoded subtitles from video.
@@ -155,6 +231,7 @@ video.mp4 \
 ```
 
 ---
+
 # OCR Example Output
 
 ```text
@@ -214,6 +291,7 @@ video.mp4 \
 ```
 
 ---
+
 # ASR Example Output
 
 ```text
@@ -236,6 +314,7 @@ video.mp4 \
     - subtitle-specific wording
 
 ---
+
 # OCR + ASR Merger
 
 Fuse OCR subtitles and ASR transcripts together.
@@ -258,6 +337,7 @@ ASR/ASR.json \
 ```
 
 ---
+
 # Merge Example Output
 
 ```text
@@ -280,6 +360,7 @@ ASR/ASR.json \
     - subtitle clarity
 
 ---
+
 # Example Workflow
 
 ## 1. OCR hardcoded subtitles
@@ -303,6 +384,7 @@ ASR.json
 ```
 
 ---
+
 # Why OCR + ASR?
 
 ASR and OCR each have different strengths.
@@ -315,12 +397,14 @@ ASR and OCR each have different strengths.
 Combining both systems often produces better subtitles than either alone.
 
 ---
+
 # Use Cases
 
 ## Restore Hardcoded Subtitles
 Recover subtitles from videos with burned-in captions.
 
 ---
+
 ## Improve ASR Accuracy
 Use OCR to correct:
 - names
@@ -340,6 +424,7 @@ Generate subtitles for:
 - livestreams
 
 ---
+
 ## Traditional Chinese Subtitle Workflows
 Useful for:
 - Taiwanese YouTube
@@ -347,6 +432,7 @@ Useful for:
 - mixed Chinese/English subtitles
 
 ---
+
 ## Local-First Subtitle Generation
 No cloud APIs required.
 
@@ -356,6 +442,7 @@ Runs locally using:
 - FFmpeg
 
 ---
+
 # Notes
 
 - First EasyOCR run downloads OCR models
@@ -365,6 +452,7 @@ Runs locally using:
 - Low-resolution video may still produce OCR artifacts
 
 ---
+
 # Future Ideas
 
 Potential future additions:
@@ -379,5 +467,5 @@ Potential future additions:
 ---
 
 # License
-MIT License
 
+MIT License

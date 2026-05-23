@@ -163,13 +163,32 @@ video.mp4 \
 --min-persistence 1
 ```
 
-## OCR Output Example
+---
+
+# OCR Example Output
 
 ```text
-[539.00] [conf=0.98] 今天的影片就在這邊結束啦
-[540.00] [conf=0.67] 如果你對國旅的話題很感興趣的話
-[541.00] [conf=0.99] 現在不限學生
+[102.00] [conf=0.93] 我第一次去東京的時候超緊張
+[104.00] [conf=0.98] 結果發現根本很多台灣人
+[106.00] [conf=0.74] 而且店員其實都很有耐心
+[108.00] [conf=0.99] 只是電車真的有點複雜
+[110.00] [conf=0.88] 我那天直接坐錯方向
+[112.00] [conf=0.95] 然後多花了快四十分鐘
+[114.00] [conf=0.81] 不過現在回想起來很好笑
+[116.00] [conf=1.00] 下次還是會想再去
 ```
+
+### OCR Notes
+
+- Better at visible subtitle text
+- Better at:
+    - names
+    - signs
+    - subtitle wording
+- More sensitive to:
+    - low resolution
+    - motion blur
+    - stylized fonts
 
 ---
 
@@ -204,12 +223,28 @@ video.mp4 \
 --hallucination-silence-threshold 2
 ```
 
-## ASR Output Example
+---
+
+# ASR Example Output
 
 ```text
-[00:08:42.400 --> 00:08:43.600] [conf=0.91]
-他們今年要去國外畢業旅行
+[00:01:42.120 --> 00:01:43.860] [conf=0.91] 我覺得大阪真的很好逛
+[00:01:43.860 --> 00:01:45.420] [conf=0.91] 而且東西也沒有想像中貴
+[00:01:45.420 --> 00:01:47.080] [conf=0.88] 台灣現在很多咖啡廳都超貴
+[00:01:47.080 --> 00:01:48.920] [conf=0.88] 去日本反而覺得輕鬆很多
+[00:01:48.920 --> 00:01:50.200] [conf=0.82] 主要還是那邊氣氛不一樣
+[00:01:50.200 --> 00:01:51.600] [conf=0.82] 會想一直走路一直逛
+[00:01:51.600 --> 00:01:52.840] [conf=0.79] 但真的很容易買太多
 ```
+
+### ASR Notes
+
+- Strong sentence flow
+- Natural grammar
+- Sometimes weak on:
+    - names
+    - brands
+    - subtitle-specific wording
 
 ---
 
@@ -234,13 +269,28 @@ ASR/ASR.json \
 --min-ocr-confidence 0.80
 ```
 
-## Merge Output Example
+---
+
+# Merge Example Output
 
 ```text
-[00:06:26.220 --> 00:06:29.580]
-[conf=0.90]
-你如果說你出去逛街什麼的
+[00:04:12.200 --> 00:04:14.540] [conf=0.96] [ASR] 我覺得現在年輕人真的很愛出國
+[00:04:14.540 --> 00:04:16.120] [conf=0.98] [OCR] 尤其日本跟韓國
+[00:04:16.120 --> 00:04:18.620] [conf=0.94] [ASR] 因為機票有時候比國旅還便宜
+[00:04:18.620 --> 00:04:20.440] [conf=1.00] [OCR] 住宿反而比較舒服
+[00:04:20.440 --> 00:04:22.800] [conf=0.92] [ASR] 而且可以順便體驗不同文化
+[00:04:22.800 --> 00:04:24.620] [conf=0.99] [OCR] 很多人一年會出國兩三次
 ```
+
+### Merge Notes
+
+- `[OCR]` means OCR won arbitration
+- `[ASR]` means Whisper ASR won arbitration
+- Confidence values help debug merge decisions
+- Fusion often improves:
+    - subtitle accuracy
+    - proper nouns
+    - subtitle clarity
 
 ---
 
@@ -348,6 +398,10 @@ Potential future additions:
 - subtitle search indexing
 
 ---
+
+# License
+
+MIT License
 
 # License
 

@@ -1,1 +1,6 @@
-
+yt-dlp
+mlx-whisper
+opencv-python
+easyocr
+rapidfuzz
+opencc
